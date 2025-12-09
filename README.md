@@ -2,14 +2,32 @@
 
 A novel framework combining **Hyperdimensional Computing (HDC)** with **Semantic Communication** for energy-efficient object detection and tracking on resource-constrained UAV platforms.
 
-## Overview
+Unmanned Aerial Vehicles (UAVs) deployed for critical missions like search-and-rescue face a fundamental bottleneck: **limited battery capacity**. Traditional approaches to real-time object detection run deep neural networks (DNNs) on every video frame and transmit full images over wireless channels, rapidly exhausting onboard energy. While frame-skipping strategies reduce computation, they sacrifice detection quality by ignoring frames entirely—a dangerous trade-off for safety-critical applications.
 
-This research project demonstrates how HDC can achieve:
-- **28% higher accuracy** (73.99% vs 57.63% mAP@50) compared to per-frame YOLO baselines
-- **54-82% energy reduction** through semantic packet transmission
-- **5-14× packet compression** by transmitting semantic object representations instead of raw frames
+### Our Approach: Semantic Communication via HDC
 
-The system alternates between YOLO object detection at periodic intervals and lightweight HDC-based tracking in between, transmitting compact semantic packets (~0.5-1.7 KB) instead of full JPEG frames (~7-9 KB).
+This project introduces a **hybrid paradigm** that combines the accuracy of deep learning with the efficiency of hyperdimensional computing:
+
+1. **Periodic DNN Inference:** Run YOLOv8 object detection at sparse intervals (e.g., every 10 frames) to establish ground-truth detections
+
+2. **HDC-Based Tracking:** Between DNN executions, use lightweight hyperdimensional computing to:
+   - Encode objects as high-dimensional binary vectors (hypervectors) capturing appearance, color, and spatial location
+   - Track objects across frames using efficient bitwise operations and cosine similarity matching
+   - Update bounding boxes through HDC spatial reasoning
+
+3. **Semantic Packet Transmission:** Instead of transmitting raw JPEG frames, send compact semantic packets containing only:
+   - Object IDs, classes, positions, velocities
+   - Differential updates (only changed attributes)
+   - Result: 5-14× smaller packets than image transmission
+
+### Key Innovation:
+
+Unlike traditional DNNs that require expensive backpropagation, HDC uses **symbolic vector operations**—binding, bundling, and circular shifts—enabling:
+- Gradient-free learning on resource-constrained hardware
+- Inherent noise robustness (bit flips in hypervectors negligibly affect similarity)
+- Real-time inference with minimal computational overhead
+
+
 
 ## Dataset Setup
 
@@ -87,13 +105,6 @@ Each annotation file contains bounding boxes in the format:
 pip install -r requirements.txt
 ```
 
-### Key Dependencies
-- `ultralytics` - YOLOv8 implementation
-- `sionna` - 3GPP channel simulation
-- `codecarbon` - Energy measurement
-- `opencv-python` - Image processing
-- `torch` - Deep learning backend
-- `numpy`, `scipy` - Numerical operations
 
 ## Repository Structure
 
@@ -121,28 +132,11 @@ SemanticHDC/
 #### `communication.py` - Wireless Channel Simulation & Packet Transmission
 Implements the wireless communication layer using the **Sionna library**, NVIDIA's open-source framework for link-level simulations of next-generation wireless systems. Sionna provides GPU-accelerated 3GPP channel models (UMi, UMa) with realistic path loss, shadow fading, and Doppler effects.
 
-**Key Classes:**
-- `Drone3GPPChannel`: Simulates UAV-to-ground station wireless link using 3GPP TR 38.901 channel models
-- `FrameTransmitter3GPP`: Handles JPEG frame compression and transmission over the simulated channel
-- `HDCStateTransmitter3GPP`: Transmits compact semantic packets containing HDC-encoded object states
-- Utility functions: `calculate_psnr()`, `calculate_ssim()` for measuring received signal quality
-
 #### `drone.py` - Detection Strategies & HDC Tracking
 Implements the three detection/tracking strategies (Baseline, Interval, HDC Hybrid) and the core HDC tracking logic.
 
-**Key Classes:**
-- `Sionna3GPPDroneChannel`: Configures OFDM resource grid and channel parameters for UAV scenarios
-- `HDCTracker`: Implements hyperdimensional computing-based object tracking between YOLO frames
-  - Encodes objects using appearance, color, and location hypervectors
-  - Performs cosine similarity matching for frame-to-frame association
-  - Updates bounding boxes based on HDC spatial reasoning
-- `BaselineWirelessDetector`: Runs YOLO on every frame (baseline strategy)
-- `BaselineIntervalDetector`: Runs YOLO every N frames, repeats previous detections (interval strategy)
-- `HDCWirelessDetector`: Alternates between YOLO and HDC tracking (hybrid strategy)
-
 #### `main.py` - Experiment Orchestration & Evaluation
 Orchestrates end-to-end experiments, manages dataset loading, runs evaluations, and computes metrics. Uses **CodeCarbon** to measure energy consumption by tracking CPU/GPU power draw during code execution, then projects these measurements to embedded platform profiles.
-
 
 #### `resource_monitoring.py` - Energy Profiling
 Tracks computational operations (YOLO inference, HDC encoding, transmission) and estimates energy consumption using CodeCarbon measurements combined with Crazyflie AI-Deck power profiles.
@@ -217,17 +211,6 @@ Energy estimates are projected to the **Crazyflie 2.1 AI-Deck** platform:
 - **Camera:** Himax HM01B0 (324×324 grayscale)
 - **Battery:** 240 mAh @ 3.7V (0.888 Wh)
 - **Documentation:** [Bitcraze Crazyflie Datasheet](https://www.bitcraze.io/documentation/hardware/crazyflie_2_1_plus/crazyflie_2_1_plus-datasheet.pdf)
-
-## Experimental Results
-
-| Scenario | Strategy | mAP@50 | Packet Size | Energy (mWh) | Savings |
-|----------|----------|--------|-------------|--------------|---------|
-| S1 (Sparse) | Baseline | 57.63% | 7.24 KB | 491.40 | - |
-| | Interval | 33.44% | 7.24 KB | 73.29 | -85.1% |
-| | **HDC Hybrid** | **73.99%** | **0.52 KB** | **86.83** | **-82.3%** |
-| S2 (Dense) | Baseline | 57.63% | 8.91 KB | 995.53 | - |
-| | Interval | 33.44% | 8.91 KB | 237.86 | -76.1% |
-| | **HDC Hybrid** | **73.99%** | **1.67 KB** | **459.06** | **-53.9%** |
 
 
 
