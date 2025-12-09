@@ -1,2 +1,14 @@
 *.env
 /.vscode
+powermetrics_log.txt
+yolo_nano.pt
+/data/VisDrone2019-VID/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS
+.DS_Store

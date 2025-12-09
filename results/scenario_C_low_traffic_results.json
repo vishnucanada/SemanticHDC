@@ -1,0 +1,226 @@
+{
+  "simulation_type": "3gpp_link_level_drone_scenario",
+  "channel_model": "Sionna TR 38.901 UMi (2.4GHz, 20dBm)",
+  "experiments": [
+    {
+      "experiment_name": "Baseline_Every_Frame_scenario_C_low_traffic",
+      "config": {
+        "system_type": "baseline_wireless",
+        "channel_params": {
+          "drone_height_m": 18.0,
+          "drone_velocity_ms": 3.0,
+          "horizontal_dist_m": 60.0
+        }
+      },
+      "transmission": {
+        "success_rate": 0.24104234527687296,
+        "semantic_similarity": 0.0,
+        "avg_bytes": 7755.325732899023,
+        "avg_snr_db": 47.36597286545798,
+        "min_snr_db": 44.497208589675594,
+        "max_snr_db": 51.02247355506346,
+        "avg_latency_ms": 36.59615906623236,
+        "throughput_mbps": 1.6953310797153986,
+        "avg_ber": 0.758957654723127,
+        "avg_bler": 0.758957654723127,
+        "avg_psnr_db": 6.107608685530248,
+        "avg_ssim": 0.1882319815699096,
+        "tiered_success": {
+          "perfect": {
+            "count": 74,
+            "percentage": 24.104234527687296
+          },
+          "good": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "usable": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "degraded": {
+            "count": 0,
+            "percentage": 0.0
+          }
+        },
+        "packet_failure_rate": 0.758957654723127,
+        "channel_stats": {
+          "avg_snr_db": 47.41252375243274,
+          "min_snr_db": 44.497208589675594,
+          "max_snr_db": 51.02247355506346,
+          "std_snr_db": 2.6616689934858324,
+          "num_samples": 307
+        }
+      },
+      "accuracy": {
+        "map50": 0.7342514250150906,
+        "precision": 0.44476006623897235,
+        "recall": 1.0
+      },
+      "efficiency": {
+        "energy": {
+          "total_kwh": 3.988045949869323e-05,
+          "total_wh": 0.03988045949869323,
+          "avg_power_watts": 3.2787575821175348
+        },
+        "platform": "crazyflie_ai_deck",
+        "fps": 7.01114340776621,
+        "yolo_calls": 307,
+        "hdc_calls": 0,
+        "total_frames": 307
+      },
+      "total_frames": 307,
+      "timestamp": "2025-12-03T11:33:41.406865"
+    },
+    {
+      "experiment_name": "Baseline_Interval_10_scenario_C_low_traffic",
+      "config": {
+        "system_type": "baseline_interval",
+        "yolo_interval": 10,
+        "channel_params": {
+          "drone_height_m": 18.0,
+          "drone_velocity_ms": 3.0,
+          "horizontal_dist_m": 60.0
+        }
+      },
+      "transmission": {
+        "success_rate": 0.25806451612903225,
+        "semantic_similarity": 0.0,
+        "avg_bytes": 7756.645161290323,
+        "avg_snr_db": 40.01440175104258,
+        "min_snr_db": 31.324301409858165,
+        "max_snr_db": 43.40715876297238,
+        "avg_latency_ms": 36.5809811827957,
+        "throughput_mbps": 1.6963230423000966,
+        "avg_ber": 0.7419354838709677,
+        "avg_bler": 0.7419354838709677,
+        "avg_psnr_db": 6.547850544935131,
+        "avg_ssim": 0.2010267342488146,
+        "tiered_success": {
+          "perfect": {
+            "count": 8,
+            "percentage": 25.806451612903224
+          },
+          "good": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "usable": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "degraded": {
+            "count": 0,
+            "percentage": 0.0
+          }
+        },
+        "packet_failure_rate": 0.7419354838709677,
+        "channel_stats": {
+          "avg_snr_db": 40.12929063136681,
+          "min_snr_db": 31.324301409858165,
+          "max_snr_db": 43.40715876297238,
+          "std_snr_db": 4.796068947393063,
+          "num_samples": 31
+        },
+        "bandwidth_savings_pct": -0.017013191150730217
+      },
+      "accuracy": {
+        "map50": 0.4952547500467136,
+        "precision": 0.32356022570188303,
+        "recall": 1.0,
+        "accuracy_loss_pct": 32.5497052952216
+      },
+      "efficiency": {
+        "energy": {
+          "total_kwh": 4.122709429004973e-06,
+          "total_wh": 0.004122709429004973,
+          "avg_power_watts": 1.5683552678296389
+        },
+        "platform": "crazyflie_ai_deck",
+        "fps": 32.44265293023508,
+        "yolo_calls": 31,
+        "hdc_calls": 0,
+        "total_frames": 307,
+        "energy_savings_pct": 89.66233217764187
+      },
+      "total_frames": 307,
+      "timestamp": "2025-12-03T11:33:56.262458"
+    },
+    {
+      "experiment_name": "HDC_State_TX_Int10_scenario_C_low_traffic",
+      "config": {
+        "system_type": "hdc_wireless",
+        "yolo_interval": 10,
+        "channel_params": {
+          "drone_height_m": 18.0,
+          "drone_velocity_ms": 3.0,
+          "horizontal_dist_m": 60.0
+        }
+      },
+      "transmission": {
+        "success_rate": 0.5161290322580645,
+        "semantic_similarity": 0.782608695652174,
+        "avg_bytes": 303.83870967741933,
+        "avg_snr_db": 40.600042239468756,
+        "min_snr_db": 31.172304111831913,
+        "max_snr_db": 55.49059033824684,
+        "avg_latency_ms": 1.5043682795698932,
+        "throughput_mbps": 1.6157677015858827,
+        "avg_ber": 0.4838709677419355,
+        "avg_bler": 0.4838709677419355,
+        "avg_psnr_db": 0.0,
+        "avg_ssim": 0.0,
+        "tiered_success": {
+          "perfect": {
+            "count": 16,
+            "percentage": 51.61290322580645
+          },
+          "good": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "usable": {
+            "count": 0,
+            "percentage": 0.0
+          },
+          "degraded": {
+            "count": 0,
+            "percentage": 0.0
+          }
+        },
+        "packet_failure_rate": 0.4838709677419355,
+        "compression_ratio": 1.4298757829918252,
+        "channel_stats": {
+          "avg_snr_db": 41.81663166850451,
+          "min_snr_db": 31.172304111831913,
+          "max_snr_db": 55.49059033824684,
+          "std_snr_db": 11.060193813414083,
+          "num_samples": 31
+        },
+        "bandwidth_savings_pct": 96.08219280347569
+      },
+      "accuracy": {
+        "map50": 0.8762703722800458,
+        "precision": 0.6540581064614224,
+        "recall": 1.0,
+        "accuracy_loss_pct": -19.342004989916965
+      },
+      "efficiency": {
+        "energy": {
+          "total_kwh": 3.2879583106085524e-06,
+          "total_wh": 0.0032879583106085524,
+          "avg_power_watts": 1.5203322715002598
+        },
+        "platform": "crazyflie_ai_deck",
+        "fps": 39.43484632951584,
+        "yolo_calls": 31,
+        "hdc_calls": 276,
+        "total_frames": 307,
+        "energy_savings_pct": 91.75546532828618,
+        "yolo_reduction_pct": 89.90228013029315
+      },
+      "total_frames": 307,
+      "timestamp": "2025-12-03T11:34:09.720887"
+    }
+  ]
+}
